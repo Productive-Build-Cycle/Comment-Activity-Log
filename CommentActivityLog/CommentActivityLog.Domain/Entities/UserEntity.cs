@@ -1,13 +1,13 @@
 ﻿namespace CommentsAndActivityLog.Domain.Entities;
 
-public class User
+public class UserEntity
 {
-    public User()
+    public UserEntity()
     {
-        CommentList = new List<Comment>();
+        CommentList = new List<CommentEntity>();
     }
     public int Id { get; set; }
     public string Email { get; set; }
     public string UserName { get; set; }
-    public List<Comment> CommentList { get; set; }
+    public List<CommentEntity> CommentList { get; set; }
 }

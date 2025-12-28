@@ -1,13 +1,13 @@
 ﻿namespace CommentsAndActivityLog.Domain.Entities;
 
-public class Task
+public class TaskEntity
 {
-    public Task()
+    public TaskEntity()
     {
-        CommentList = new List<Comment>();
+        CommentList = new List<CommentEntity>();
     }
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public List<Comment> CommentList { get; set; }
+    public List<CommentEntity> CommentList { get; set; }
 }
