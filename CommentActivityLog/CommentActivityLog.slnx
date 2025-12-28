@@ -1,6 +1,0 @@
-<Solution>
-  <Project Path="CommentActivityLog.Api/CommentActivityLog.Api.csproj" />
-  <Project Path="CommentActivityLog.Application/CommentActivityLog.Application.csproj" />
-  <Project Path="CommentActivityLog.Domain/CommentActivityLog.Domain.csproj" />
-  <Project Path="CommentActivityLog.Infrastructure/CommentActivityLog.Infrastructure.csproj" />
-</Solution>
