@@ -1,0 +1,6 @@
+@CommentsAndActivityLog.Api_HostAddress = http://localhost:5027
+
+GET {{CommentsAndActivityLog.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

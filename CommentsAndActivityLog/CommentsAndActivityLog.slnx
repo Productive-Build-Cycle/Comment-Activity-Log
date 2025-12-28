@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CommentsAndActivityLog.Api/CommentsAndActivityLog.Api.csproj" />
+  <Project Path="CommentsAndActivityLog.Application/CommentsAndActivityLog.Application.csproj" />
+  <Project Path="CommentsAndActivityLog.Domain/CommentsAndActivityLog.Domain.csproj" />
+  <Project Path="CommentsAndActivityLog.Infrastructure/CommentsAndActivityLog.Infrastructure.csproj" />
+</Solution>
