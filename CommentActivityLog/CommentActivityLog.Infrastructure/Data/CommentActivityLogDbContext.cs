@@ -12,7 +12,7 @@ public class CommentActivityLogDbContext : DbContext
 
     public CommentActivityLogDbContext(DbContextOptions option) : base(option)
     {
-        
+
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -66,6 +66,11 @@ public class CommentActivityLogDbContext : DbContext
             .WithOne(comment => comment.Task)
             .HasForeignKey(comment => comment.TaskId);
 
+        modelBuilder.Entity<TaskEntity>().HasData(
+            new TaskEntity { Id = 1, Title = "ایجاد پروژه ی جدید", Description = "لطفا در ویژوال استادیو یک پروژه وب جدید ایجاد کنید" },
+            new TaskEntity { Id = 2, Title = "ایجاد معماری", Description = "لطفا معماری پروژه را تعیین کنید" },
+            new TaskEntity { Id = 3, Title = "ایجاد مدل", Description = "لطفا مدل و موجودیت های خود را مشخص کنید" });
+
         #endregion
 
         #region User
@@ -88,6 +93,11 @@ public class CommentActivityLogDbContext : DbContext
             .HasMany(user => user.CommentList)
             .WithOne(comment => comment.User)
             .HasForeignKey(comment => comment.UserId);
+
+        modelBuilder.Entity<UserEntity>().HasData(
+            new UserEntity { Id = 1, UserName = "Mahya", Email = "mahyaaa.khashkhashi@gmail.com" },
+            new UserEntity { Id = 2, UserName = "Hosein", Email = "HosseinDinarvand@gmail.com" },
+            new UserEntity { Id = 3, UserName = "Alireza", Email = "AlirezaEntezari@gmail.com" });
 
         #endregion
 
