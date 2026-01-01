@@ -31,7 +31,9 @@ public class CommentActivityLogDbContext : DbContext
             .IsRequired()
             .HasMaxLength(500);
 
-        modelBuilder.Entity<CommentEntity>().HasOne(comment => comment.Task)
+        modelBuilder.Entity<CommentEntity>().Property(comment => comment.Created_at).IsRequired();
+
+ modelBuilder.Entity<CommentEntity>().HasOne(comment => comment.Task)
             .WithMany(task => task.CommentList)
             .HasForeignKey(comment => comment.TaskId);
 

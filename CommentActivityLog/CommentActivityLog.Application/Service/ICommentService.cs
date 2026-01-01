@@ -1,15 +1,12 @@
 ﻿using CommentActivityLog.Application.DTOs.Comment;
-using System.Net.NetworkInformation;
 
 namespace CommentActivityLog.Application.Service;
 
 public interface ICommentService
 {
-    Task Create(InsertCommentDto commentDto);
-    Task Update(UpdateCommentDto commentDto);
-    // insert service
-    // update comment
-    // delete comment 
-    // getall
-    // get by id
+    Task CreateAsync(InsertCommentDto commentDto);
+    Task UpdateAsync(UpdateCommentDto commentDto);
+    Task DeleteAsync(int id);
+    Task<CommentDto> GetByIdAsync(int id);
+    Task<List<CommentDto>> GetAllByTaskIdAsync(int taskId);
 }
