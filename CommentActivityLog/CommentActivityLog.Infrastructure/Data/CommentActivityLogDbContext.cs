@@ -5,6 +5,11 @@ namespace CommentActivityLog.Infrastructure.Data;
 
 public class CommentActivityLogDbContext : DbContext
 {
+    public DbSet<CommentEntity> Comment { get; set; }
+    public DbSet<TaskEntity> Task { get; set; }
+    public DbSet<UserEntity> User { get; set; }
+    public DbSet<ActivityLogEntity> ActivityLog { get; set; }
+
     public CommentActivityLogDbContext(DbContextOptions option) : base(option)
     {
         
