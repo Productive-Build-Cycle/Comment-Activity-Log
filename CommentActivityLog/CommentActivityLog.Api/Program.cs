@@ -14,10 +14,16 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<IActivityLogService, ActivityLogService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Comment Activity Log", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Comment Activity Log",
+        Version = "v1"
+    });
 });
+
 
 builder.Services.AddControllers();
 
@@ -32,7 +38,7 @@ app.UseSwagger();
 
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/index.html", "Comment Activity Log");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Comment Activity Log");
 });
 
 if (app.Environment.IsDevelopment())
