@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CommentdActivityLog.Domain.Enums;
+namespace CommentActivityLog.Domain.Enums;
 
 public enum ActionEnum
 {

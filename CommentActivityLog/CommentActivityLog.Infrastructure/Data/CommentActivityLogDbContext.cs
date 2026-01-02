@@ -1,4 +1,4 @@
-﻿using CommentdActivityLog.Domain.Entities;
+﻿using CommentActivityLog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommentActivityLog.Infrastructure.Data;
@@ -9,8 +9,9 @@ public class CommentActivityLogDbContext : DbContext
     public DbSet<TaskEntity> Task { get; set; }
     public DbSet<UserEntity> User { get; set; }
     public DbSet<ActivityLogEntity> ActivityLog { get; set; }
+    public DbSet<GetActivityLogs> GetActivityLogs { get; set; }
 
-    public CommentActivityLogDbContext(DbContextOptions option) : base(option)
+    public CommentActivityLogDbContext(DbContextOptions<CommentActivityLogDbContext> option) : base(option)
     {
 
     }
@@ -120,6 +121,12 @@ public class CommentActivityLogDbContext : DbContext
             .HasOne(activityLog => activityLog.Comment)
             .WithMany(comment => comment.ActivitiyLogList)
             .HasForeignKey(activityLog => activityLog.CommentId);
+
+        #endregion
+
+        #region GetActivityLogs
+
+        modelBuilder.Entity<GetActivityLogs>().HasNoKey();
 
         #endregion
 

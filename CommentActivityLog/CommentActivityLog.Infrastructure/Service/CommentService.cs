@@ -1,8 +1,8 @@
 ﻿using CommentActivityLog.Application.DTOs.Comment;
 using CommentActivityLog.Application.Service;
 using CommentActivityLog.Infrastructure.Data;
-using CommentdActivityLog.Domain.Entities;
-using CommentdActivityLog.Domain.Enums;
+using CommentActivityLog.Domain.Entities;
+using CommentActivityLog.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommentActivityLog.Infrastructure.Service;

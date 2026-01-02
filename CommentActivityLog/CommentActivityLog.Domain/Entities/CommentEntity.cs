@@ -1,4 +1,4 @@
-﻿namespace CommentdActivityLog.Domain.Entities;
+﻿namespace CommentActivityLog.Domain.Entities;
 
 public class CommentEntity
 {

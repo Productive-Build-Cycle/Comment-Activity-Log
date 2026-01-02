@@ -1,4 +1,4 @@
-﻿using CommentdActivityLog.Domain.Enums;
+﻿using CommentActivityLog.Domain.Enums;
 
 namespace CommentActivityLog.Application.DTOs.Comment;
 

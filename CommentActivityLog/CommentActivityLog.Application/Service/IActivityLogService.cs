@@ -1,10 +1,11 @@
-﻿using CommentdActivityLog.Domain.Enums;
+﻿using CommentActivityLog.Domain.Entities;
+using CommentActivityLog.Domain.Enums;
 
 namespace CommentActivityLog.Application.Service;
 
 public interface IActivityLogService
 {
-    Task GetActivityLogs(ActivityLogDto request);
+    Task<List<GetActivityLogs>> GetActivityLogs(ActivityLogDto request);
 }
 
 public class ActivityLogDto

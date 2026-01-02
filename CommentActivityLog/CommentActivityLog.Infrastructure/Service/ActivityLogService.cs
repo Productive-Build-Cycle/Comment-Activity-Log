@@ -1,5 +1,7 @@
 ﻿using CommentActivityLog.Application.Service;
+using CommentActivityLog.Domain.Entities;
 using CommentActivityLog.Infrastructure.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
 
@@ -14,20 +16,23 @@ public class ActivityLogService : IActivityLogService
         _dbContext = dbContext;
     }
 
-    public async Task GetActivityLogs(ActivityLogDto request)
+    public async Task<List<GetActivityLogs>> GetActivityLogs(ActivityLogDto request)
     {
-        var parameters = new
+        var parameters = new[]
         {
-            fromdate = request.from_date,
-            todate = request.to_date,
-            user_name = request.user_name,
-            action = request.action,
+            new SqlParameter("@fromdate" , request.from_date),
+            new SqlParameter("@todate" , request.to_date),
+            new SqlParameter("@user_name" , request.user_name),
+            new SqlParameter("@action" , request.action),
         };
 
-        //FormattableString str = "";
-        //var activity_logs = await _dbContext
-        //    .ActivityLog
-        //    .FromSql("EXEC [dbo].[sp_activity_log_report] @fromdate, @todate, @user_name, @action", parameters)
-        //    .Select(x => );
+        var activity_logs = await _dbContext
+            .GetActivityLogs
+            .FromSqlRaw("EXEC [dbo].[sp_activity_log_report] @fromdate, @todate, @user_name, @action", parameters)
+            .AsNoTracking()
+            .ToListAsync();
+
+        return activity_logs;
+
     }
 }
