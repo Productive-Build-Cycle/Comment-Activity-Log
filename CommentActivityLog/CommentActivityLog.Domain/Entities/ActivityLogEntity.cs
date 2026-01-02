@@ -1,6 +1,6 @@
-﻿using CommentsAndActivityLog.Domain.Enums;
+﻿using CommentdActivityLog.Domain.Enums;
 
-namespace CommentsAndActivityLog.Domain.Entities;
+namespace CommentdActivityLog.Domain.Entities;
 
 public class ActivityLogEntity
 {

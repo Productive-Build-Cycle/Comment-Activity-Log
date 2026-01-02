@@ -24,10 +24,10 @@ public class ActivityLogService : IActivityLogService
             action = request.action,
         };
 
-        FormattableString str = "";
-        var activity_logs = await _dbContext
-            .ActivityLog
-            .FromSql("EXEC [dbo].[sp_activity_log_report] @fromdate, @todate, @user_name, @action", parameters)
-            .Select(x => );
+        //FormattableString str = "";
+        //var activity_logs = await _dbContext
+        //    .ActivityLog
+        //    .FromSql("EXEC [dbo].[sp_activity_log_report] @fromdate, @todate, @user_name, @action", parameters)
+        //    .Select(x => );
     }
 }

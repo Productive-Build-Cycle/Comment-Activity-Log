@@ -1,4 +1,4 @@
-﻿namespace CommentsAndActivityLog.Domain.Entities;
+﻿namespace CommentdActivityLog.Domain.Entities;
 
 public class UserEntity
 {

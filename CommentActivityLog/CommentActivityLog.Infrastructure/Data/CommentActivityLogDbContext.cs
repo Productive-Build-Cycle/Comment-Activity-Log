@@ -1,4 +1,4 @@
-﻿using CommentsAndActivityLog.Domain.Entities;
+﻿using CommentdActivityLog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommentActivityLog.Infrastructure.Data;
@@ -31,11 +31,9 @@ public class CommentActivityLogDbContext : DbContext
             .IsRequired()
             .HasMaxLength(500);
 
-        modelBuilder.Entity<CommentEntity>().Property(comment => comment.Created_at).IsRequired();
-
- modelBuilder.Entity<CommentEntity>().HasOne(comment => comment.Task)
-            .WithMany(task => task.CommentList)
-            .HasForeignKey(comment => comment.TaskId);
+        modelBuilder.Entity<CommentEntity>().HasOne(comment => comment.Task)
+                   .WithMany(task => task.CommentList)
+                   .HasForeignKey(comment => comment.TaskId);
 
         modelBuilder.Entity<CommentEntity>().HasOne(comment => comment.User)
             .WithMany(user => user.CommentList)
