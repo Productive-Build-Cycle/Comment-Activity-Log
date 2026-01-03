@@ -18,22 +18,22 @@ public class CommentController : ControllerBase
     [HttpPost()]
     public async Task<IActionResult> Create(InsertCommentDto comment)
     {
-        await _commentService.CreateAsync(comment);
-        return Ok();
+        var result = await _commentService.CreateAsync(comment);
+        return Ok(result);
     }
 
     [HttpPatch("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateCommentDto comment)
     {
-        await _commentService.UpdateAsync(comment);
-        return Ok();
+        var result = await _commentService.UpdateAsync(comment);
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _commentService.DeleteAsync(id);
-        return Ok();
+        var result = await _commentService.DeleteAsync(id);
+        return Ok(result);
     }
 
     [HttpGet("{id}")]

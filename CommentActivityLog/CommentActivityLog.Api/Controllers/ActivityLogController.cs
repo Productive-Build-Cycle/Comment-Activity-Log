@@ -17,7 +17,7 @@ public class ActivityLogController : ControllerBase
     [HttpGet()]
     public async Task<IActionResult> GetCommentActivityLogs([FromQuery] ActivityLogDto request)
     {
-        await _activityLogService.GetActivityLogs(request);
-        return Ok();
+        var result = await _activityLogService.GetActivityLogs(request);
+        return Ok(result);
     }
 }
