@@ -1,8 +1,9 @@
 ﻿using CommentActivityLog.Application.DTOs.Comment;
 using CommentActivityLog.Application.Service;
-using CommentActivityLog.Infrastructure.Data;
+using CommentActivityLog.Domain.Common;
 using CommentActivityLog.Domain.Entities;
 using CommentActivityLog.Domain.Enums;
+using CommentActivityLog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommentActivityLog.Infrastructure.Service;
@@ -15,7 +16,7 @@ public class CommentService : ICommentService
         _dbContext = dbContext;
     }
 
-    public async Task CreateAsync(InsertCommentDto commentDto)
+    public async Task<Result> CreateAsync(InsertCommentDto commentDto)
     {
         var created_date = DateTime.Now;
         var comment = new CommentEntity
@@ -33,10 +34,25 @@ public class CommentService : ICommentService
 
         await _dbContext.Comment.AddAsync(comment);
         await _dbContext.SaveChangesAsync();
+
+        return new Result
+        {
+            IsSuccess = true,
+            Message = "comment created successfully."
+        };
     }
-    public async Task UpdateAsync(UpdateCommentDto commentDto)
+    public async Task<Result> UpdateAsync(UpdateCommentDto commentDto)
     {
         var comment = await _dbContext.Comment.FindAsync(commentDto.Id);
+        if(comment is null)
+        {
+            return new Result
+            {
+                IsSuccess = false,
+                Message = "comment not found."
+            };
+        }
+
         comment.Content = commentDto.Content;
 
         var activityLog = new ActivityLogEntity
@@ -48,10 +64,26 @@ public class CommentService : ICommentService
 
         await _dbContext.ActivityLog.AddAsync(activityLog);
         await _dbContext.SaveChangesAsync();
+
+        return new Result
+        {
+            IsSuccess = true,
+            Message = "comment updated successfully."
+        };
     }
-    public async Task DeleteAsync(int id)
+    public async Task<Result> DeleteAsync(int id)
     {
         var comment = await _dbContext.Comment.FindAsync(id);
+
+        if (comment is null)
+        {
+            return new Result
+            {
+                IsSuccess = false,
+                Message = "comment not found."
+            };
+        }
+
         comment.IsDelete = true;
 
         var activityLog = new ActivityLogEntity
@@ -63,10 +95,25 @@ public class CommentService : ICommentService
 
         await _dbContext.ActivityLog.AddAsync(activityLog);
         await _dbContext.SaveChangesAsync();
+
+        return new Result
+        {
+            IsSuccess = true,
+            Message = "comment deleted successfully."
+        };
     }
-    public async Task<CommentDto> GetByIdAsync(int id)
+    public async Task<Result<CommentDto>> GetByIdAsync(int id)
     {
         var comment = await _dbContext.Comment.FindAsync(id);
+        if (comment is null)
+        {
+            return new Result<CommentDto>
+            {
+                IsSuccess = false,
+                Message = "comment not found."
+            };
+        }
+
         var response = new CommentDto
         {
             Id = comment.Id,
@@ -75,9 +122,13 @@ public class CommentService : ICommentService
             TaskId = comment.TaskId
         };
 
-        return response;
+        return new Result<CommentDto>
+        {
+            IsSuccess = true,
+            Data = response
+        };
     }
-    public async Task<List<CommentDto>> GetAllByTaskIdAsync(int taskId)
+    public async Task<Result<List<CommentDto>>> GetAllByTaskIdAsync(int taskId)
     {
         var comments = await _dbContext.Comment.Select(comment => new  CommentDto
         {
@@ -86,9 +137,14 @@ public class CommentService : ICommentService
             TaskId = comment.TaskId,
             IsDelete = comment.IsDelete
         })
+        .AsNoTracking()
         .OrderByDescending(comment => comment.Id)
         .ToListAsync();
 
-        return comments;
+        return new Result<List<CommentDto>>
+        {
+            IsSuccess = true,
+            Data = comments
+        };
     }
 }

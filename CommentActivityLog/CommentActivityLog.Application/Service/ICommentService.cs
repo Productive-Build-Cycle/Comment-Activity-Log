@@ -1,12 +1,13 @@
 ﻿using CommentActivityLog.Application.DTOs.Comment;
+using CommentActivityLog.Domain.Common;
 
 namespace CommentActivityLog.Application.Service;
 
 public interface ICommentService
 {
-    Task CreateAsync(InsertCommentDto commentDto);
-    Task UpdateAsync(UpdateCommentDto commentDto);
-    Task DeleteAsync(int id);
-    Task<CommentDto> GetByIdAsync(int id);
-    Task<List<CommentDto>> GetAllByTaskIdAsync(int taskId);
+    Task<Result> CreateAsync(InsertCommentDto commentDto);
+    Task<Result> UpdateAsync(UpdateCommentDto commentDto);
+    Task<Result> DeleteAsync(int id);
+    Task<Result<CommentDto>> GetByIdAsync(int id);
+    Task<Result<List<CommentDto>>> GetAllByTaskIdAsync(int taskId);
 }
