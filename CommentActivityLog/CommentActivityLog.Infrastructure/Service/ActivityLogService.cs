@@ -1,5 +1,6 @@
 ﻿using CommentActivityLog.Application.DTOs.ActivityLog;
 using CommentActivityLog.Application.Service;
+using CommentActivityLog.Domain.Common;
 using CommentActivityLog.Domain.Entities;
 using CommentActivityLog.Infrastructure.Data;
 using Microsoft.Data.SqlClient;
@@ -17,7 +18,7 @@ public class ActivityLogService : IActivityLogService
         _dbContext = dbContext;
     }
 
-    public async Task<List<GetActivityLogs>> GetActivityLogs(ActivityLogDto request)
+    public async Task<Result<List<GetActivityLogs>>> GetActivityLogs(ActivityLogDto request)
     {
         var parameters = new[]
         {
@@ -33,7 +34,12 @@ public class ActivityLogService : IActivityLogService
             .AsNoTracking()
             .ToListAsync();
 
-        return activity_logs;
+        return new Result<List<GetActivityLogs>>
+        {
+            IsSuccess = true,
+            Data = activity_logs,
+            Message = string.Empty
+        };
 
     }
 }
