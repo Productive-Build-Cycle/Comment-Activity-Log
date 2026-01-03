@@ -1,6 +1,10 @@
+using CommentActivityLog.Api.Filter;
 using CommentActivityLog.Application.Service;
+using CommentActivityLog.Application.Validations.ActivityLog;
 using CommentActivityLog.Infrastructure.Data;
 using CommentActivityLog.Infrastructure.Service;
+using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
@@ -8,7 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(option => option.Filters.Add(new ValidationFilter()));
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IActivityLogService, ActivityLogService>();
@@ -24,6 +29,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddValidatorsFromAssemblyContaining<ActivityLogDtoValidation>();
 
 builder.Services.AddControllers();
 
