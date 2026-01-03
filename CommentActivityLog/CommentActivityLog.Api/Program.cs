@@ -4,7 +4,6 @@ using CommentActivityLog.Application.Validations.ActivityLog;
 using CommentActivityLog.Infrastructure.Data;
 using CommentActivityLog.Infrastructure.Service;
 using FluentValidation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
@@ -12,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(option => option.Filters.Add(new ValidationFilter()));
+builder.Services.AddControllers(option => option.Filters.Add<FluentValidationFilter>());
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
