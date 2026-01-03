@@ -1,4 +1,5 @@
-﻿using CommentActivityLog.Application.Service;
+﻿using CommentActivityLog.Application.DTOs.ActivityLog;
+using CommentActivityLog.Application.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommentActivityLog.Api.Controllers;
